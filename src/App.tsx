@@ -1,10 +1,10 @@
-import React, { useState, FormEvent } from "react";
-import { Dialog } from "@radix-ui/react-dialog";
+import { useState } from "react";
+import type { FormEvent } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { Button } from "./components/ui/button";
 import { DialogContent, DialogHeader, DialogTrigger } from "./components/ui/dialog";
 import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
-
 type ToDoList = {
   title: string;
   details: string;
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <main className="bg-pink-300 w-screen h-screen p-4">
-      <Dialog>
+      <Dialog.Root>
         <DialogTrigger asChild>
           <Button className="bg-emerald-100 text-pink-400 p-4">Add new</Button>
         </DialogTrigger>
@@ -41,14 +41,19 @@ function App() {
           <form onSubmit={handleList}>
             <Input placeholder="List Name" name="title" />
             <Textarea placeholder="Enter your tasks" name="details" />
-            <Button type="submit" className="bg-yellow-50 text-pink-400">Create List</Button>
+            <Button type="submit" className="bg-yellow-50 text-pink-400">
+              Create List
+            </Button>
           </form>
         </DialogContent>
-      </Dialog>
+      </Dialog.Root>
 
       <section className="mt-6 space-y-4">
         {lists.map((todo, index) => (
-          <div key={index} className="bg-white p-4 rounded shadow flex justify-between items-start">
+          <div
+            key={index}
+            className="bg-white p-4 rounded shadow flex justify-between items-start"
+          >
             <div>
               <h1 className="font-bold text-lg text-pink-500">{todo.title}</h1>
               <p className="text-gray-700">{todo.details}</p>
